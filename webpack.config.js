@@ -11,5 +11,5 @@ module.exports = {
             directory: path.join(__dirname, '/')
         }
     },
-    mode: "development"
+    mode: "production"
 }
