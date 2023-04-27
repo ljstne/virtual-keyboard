@@ -20,7 +20,14 @@
 }
 
 .key-single {
-    padding: 5px;
-    background-color: rgb(83, 83, 83);
-    margin: 2px;
+    padding: 10px;
+    background-color: rgb(153, 153, 153);
+    transition: background-color 300ms;
+    margin: 3px;
+}
+
+.key-single.clicked {
+    background-color: rgb(242, 137, 219);
+    transition: background-color 300ms;
+
 }

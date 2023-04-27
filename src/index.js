@@ -1,9 +1,12 @@
 "use strict";
+
+// import 
+
 const body = document.body;
 
 const keys = [
     "`","1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
-    "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "Del",
+    "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "Del",
     "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
     "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "Shift",
     "Control", "Win", "Alt", "Space", "Alt", "Control", "Left", "Up", "Down", "Right"
@@ -31,6 +34,7 @@ for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 14; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
+            keyHtml.setAttribute('data-key', `${keys[j]}`)
             keyHtml.setAttribute('role', 'button')
             const currentKey = keys[j];
             keyHtml.innerText = currentKey;
@@ -41,6 +45,7 @@ for (let i = 0; i < 5; i++) {
         for (let j = 14; j < 29; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
+            keyHtml.setAttribute('data-key', `${keys[j]}`)
             keyHtml.setAttribute('role', 'button')
             const currentKey = keys[j];
             keyHtml.innerText = currentKey;
@@ -51,6 +56,7 @@ for (let i = 0; i < 5; i++) {
         for (let j = 29; j < 42; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
+            keyHtml.setAttribute('data-key', `${keys[j]}`)
             keyHtml.setAttribute('role', 'button');
             const currentKey = keys[j];
             keyHtml.innerText = currentKey;
@@ -61,6 +67,7 @@ for (let i = 0; i < 5; i++) {
         for (let j = 42; j < 54; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
+            keyHtml.setAttribute('data-key', `${keys[j]}`)
             keyHtml.setAttribute('role', 'button');
             const currentKey = keys[j];
             keyHtml.innerText = currentKey;
@@ -71,6 +78,7 @@ for (let i = 0; i < 5; i++) {
         for (let j = 54; j < 64; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
+            keyHtml.setAttribute('data-key', `${keys[j]}`)
             keyHtml.setAttribute('role', 'button');
             const currentKey = keys[j];
             keyHtml.innerText = currentKey;
@@ -79,9 +87,13 @@ for (let i = 0; i < 5; i++) {
     }
 
     keyboardContainer.append(keyboardRow)
-}
+};
 
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    textArea.value += key;
-})
+const keyboardKeys = document.querySelectorAll('.key-single');
+
+// document.addEventListener('keydown', (event) => {
+//     const key = event.key;
+//     textArea.value += key;
+// })
+
+export {keyboardKeys, textArea};
