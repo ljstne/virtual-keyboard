@@ -87,7 +87,7 @@ for (let i = 0; i < 5; i++) {
     }
 
     keyboardContainer.append(keyboardRow)
-};
+}
 
 const keyboardKeys = document.querySelectorAll('.key-single');
 

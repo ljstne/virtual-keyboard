@@ -23,7 +23,7 @@ document.addEventListener('keydown', (event) => {
     let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key);
     if (keySelected === undefined) {
         keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code)
-    };
+    }
     
     keySelected.classList.add('clicked');
     const key = event.key;
@@ -37,6 +37,6 @@ document.addEventListener('keyup', (event) => {
     let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key);
     if (keySelected === undefined) {
         keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code)
-    };
+    }
     keySelected.classList.remove('clicked');
 })

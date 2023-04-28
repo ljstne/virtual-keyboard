@@ -20,10 +20,13 @@
 }
 
 .key-single {
-    padding: 10px;
-    background-color: rgb(153, 153, 153);
+    padding: 7px 25px 13px 9px;
+    background-color: rgb(39, 39, 39);
+    color: rgb(228, 233, 235);
     transition: background-color 300ms;
-    margin: 3px;
+    margin: 5px 4px;
+    font-size: 1.2rem;
+    border: 2px solid rgb(221, 219, 219);
 }
 
 .key-single.clicked {
