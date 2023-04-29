@@ -9,8 +9,21 @@ const keys = [
     "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "Del",
     "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
     "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "Shift",
-    "Control", "Win", "Alt", "Space", "Alt", "Control", "Left", "Up", "Down", "Right"
-]
+    "Control", "Win", "Alt", "Space", "Alt", "Control", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
+];
+
+const keysCaps = [
+    "`","1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+    "Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\", "Del",
+    "CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter",
+    "Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "?", "Shift",
+    "Control", "Win", "Alt", "Space", "Alt", "Control", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
+];
+
+const functionalKeys = {
+    indexes: ["Tab", "Win", "CapsLock", "Alt", "Shift"],
+}
+
 
 const wrapper = document.createElement('div');
 wrapper.className = 'wrapper';
@@ -24,6 +37,20 @@ const keyboardContainer = document.createElement('div');
 keyboardContainer.className = 'keyboard__container';
 wrapper.append(keyboardContainer);
 
+let keyboardKeys;
+
+const fillKeys = async function(caps) {
+
+
+    keyboardContainer.innerHTML = '';
+
+
+let keysArrayToUse = keys;
+
+if (caps === true) {
+    keysArrayToUse = keysCaps;
+}
+
 for (let i = 0; i < 5; i++) {
     const keyboardRow = document.createElement('div');
     keyboardRow.className = "keys-row";
@@ -34,9 +61,9 @@ for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 14; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keys[j]}`)
+            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
             keyHtml.setAttribute('role', 'button')
-            const currentKey = keys[j];
+            const currentKey = keysArrayToUse[j];
             keyHtml.innerText = currentKey;
             keyboardRow.append(keyHtml);
         }
@@ -45,9 +72,9 @@ for (let i = 0; i < 5; i++) {
         for (let j = 14; j < 29; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keys[j]}`)
+            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
             keyHtml.setAttribute('role', 'button')
-            const currentKey = keys[j];
+            const currentKey = keysArrayToUse[j];
             keyHtml.innerText = currentKey;
             keyboardRow.append(keyHtml);
         }
@@ -56,9 +83,9 @@ for (let i = 0; i < 5; i++) {
         for (let j = 29; j < 42; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keys[j]}`)
+            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
             keyHtml.setAttribute('role', 'button');
-            const currentKey = keys[j];
+            const currentKey = keysArrayToUse[j];
             keyHtml.innerText = currentKey;
             keyboardRow.append(keyHtml);
         }
@@ -67,9 +94,9 @@ for (let i = 0; i < 5; i++) {
         for (let j = 42; j < 54; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keys[j]}`)
+            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
             keyHtml.setAttribute('role', 'button');
-            const currentKey = keys[j];
+            const currentKey = keysArrayToUse[j];
             keyHtml.innerText = currentKey;
             keyboardRow.append(keyHtml);
         }
@@ -78,9 +105,9 @@ for (let i = 0; i < 5; i++) {
         for (let j = 54; j < 64; j++) {
             const keyHtml = document.createElement('div');
             keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keys[j]}`)
+            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
             keyHtml.setAttribute('role', 'button');
-            const currentKey = keys[j];
+            const currentKey = keysArrayToUse[j];
             keyHtml.innerText = currentKey;
             keyboardRow.append(keyHtml);
         }
@@ -89,11 +116,12 @@ for (let i = 0; i < 5; i++) {
     keyboardContainer.append(keyboardRow)
 }
 
-const keyboardKeys = document.querySelectorAll('.key-single');
+}
+fillKeys(false)
 
 // document.addEventListener('keydown', (event) => {
 //     const key = event.key;
 //     textArea.value += key;
 // })
 
-export {keyboardKeys, textArea};
+export {textArea, functionalKeys, fillKeys};
