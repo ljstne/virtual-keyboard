@@ -17,7 +17,6 @@ const keyboardContainer = document.createElement('div');
 keyboardContainer.className = 'keyboard__container';
 wrapper.append(keyboardContainer);
 
-let keyboardKeys;
 
 class Keyboard {
     constructor() {
@@ -42,7 +41,7 @@ class Keyboard {
             }
             else if (caps === true && layout === 'Russian') {
                 keysArrayToUse = russianKeyboardCaps;
-            };
+            }
                 
             for (let i = 0; i < 5; i++) {
                 const keyboardRow = document.createElement('div');
@@ -62,7 +61,6 @@ class Keyboard {
                 else if (i === 1) {
                     for (let j = 14; j < 29; j++) {
                         const keyHtml = document.createElement('div');
-                        const span = document.createElement('span');
                         keyHtml.className = "key-single";
                         keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
                         keyHtml.setAttribute('role', 'button');
@@ -74,7 +72,6 @@ class Keyboard {
                 else if (i === 2) {
                     for (let j = 29; j < 42; j++) {
                         const keyHtml = document.createElement('div');
-                        const span = document.createElement('span');
                         keyHtml.className = "key-single";
                         keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
                         keyHtml.setAttribute('role', 'button');
@@ -86,25 +83,41 @@ class Keyboard {
                 else if (i === 3) {
                     for (let j = 42; j < 54; j++) {
                         const keyHtml = document.createElement('div');
-                        const span = document.createElement('span');
                         keyHtml.className = "key-single";
                         keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
                         keyHtml.setAttribute('role', 'button');
                         const currentKey = keysArrayToUse[j];
                         keyHtml.innerText = currentKey;
-                        // keyHtml.append(span);
                         keyboardRow.append(keyHtml);
                     }
                 }
                 else if (i === 4) {
+                    const arrowContainer = document.createElement('div');
+                    arrowContainer.className = 'up-down-arrows';
                     for (let j = 54; j < 65; j++) {
                         const keyHtml = document.createElement('div');
-                        keyHtml.className = "key-single";
-                        keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
-                        keyHtml.setAttribute('role', 'button');
+
+                        if (keyCodes[j] === 'ArrowUp' || keyCodes[j] === 'ArrowDown') {
+                            keyHtml.className = "key-single";
+                            keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                            keyHtml.setAttribute('role', 'button');
+                            arrowContainer.append(keyHtml);
+                            const currentKey = keysArrayToUse[j];
+                            keyHtml.innerText = currentKey;
+                            keyboardRow.append(arrowContainer);
+
+                            
+                        }
+                        else {
+                            keyHtml.className = "key-single";
+                            keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                            keyHtml.setAttribute('role', 'button');
+                             
                         const currentKey = keysArrayToUse[j];
                         keyHtml.innerText = currentKey;
                         keyboardRow.append(keyHtml);
+                        }
+
                     }
                 }
         

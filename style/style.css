@@ -23,7 +23,8 @@
 }
 
 .keys-row {
-    display: flex
+    display: flex;
+    align-items: center;
 }
 
 .key-single {
@@ -46,7 +47,8 @@
 .key-single.clicked {
     background-color: rgb(242, 137, 219);
     transition: background-color 200ms;
-
+    /* animation-name: clickedAnimation;
+    animation-duration: 400ms; */
 }
 
 .key-single[data-key="ShiftLeft"],
@@ -62,6 +64,23 @@
 .key-single[data-key="ControlLeft"],
 .key-single[data-key="ControlRight"] {
     padding: 6px 23px 10px 9px;
+}
+
+.key-single[data-key="ArrowUp"],
+.key-single[data-key="ArrowDown"]
+ {
+    text-align: center;
+    height: 23px;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    width: 55px;
+}
+
+.key-single[data-key="ArrowLeft"],
+.key-single[data-key="ArrowRight"] {
+    padding: 6px 0 10px 0;
+    text-align: center;
 }
 
 .keyboard__description {
