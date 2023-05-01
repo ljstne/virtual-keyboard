@@ -1,43 +1,17 @@
-import {textArea, functionalKeys, fillKeys} from "./index.js";
+import {keyboard, textArea, fillKeys} from "./index.js";
+import {functionalKeys} from "./layouts.js";
+
 
 let keyboardKeys = document.querySelectorAll('.key-single');
 
 let iteratableKeyboard = Array.from(keyboardKeys);
 
 
-keyboardKeys.forEach(element => {
-    element.addEventListener ('mousedown', (event) => {
-        element.classList.add('clicked');
-        const key = event.target.getAttribute('data-key');
-        textArea.value += key;
-    });
-    element.addEventListener('mouseup', () => {
-        element.classList.remove('clicked');
-    })
-    element.addEventListener('mouseleave', () => {
-        element.classList.remove('clicked');
-    })
-});
+const timeout = 300;
 
-let caps = false;
-let shift = false;
-
-let pressedKeys = {
-};
-
-document.addEventListener('keydown', (event) => {
-
-    if (pressedKeys['CapsLock'] === true && event.key === 'CapsLock') {
-        delete pressedKeys['CapsLock'];
-        fillKeys(false);
-    }
-    else {
-    pressedKeys[event.key] = true;
-    }
-    console.log(pressedKeys);
-
+const capitalizeLetters = () => {
     if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === undefined && !(Object.keys(pressedKeys).length > 2)) {
-        fillKeys(true);
+        keyboard.fillKeys(true);
         console.log(event.key,'1111111111111111');
 
     }
@@ -45,75 +19,122 @@ document.addEventListener('keydown', (event) => {
     else if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === true 
     && (Object.keys(pressedKeys).length <= 2) ) {
         console.log(event.key,'fdkaokfeo,FDAFFDAFDAFDAFADF', Object.keys(pressedKeys).length);
-        fillKeys(false);
+        keyboard.fillKeys(false);
     }
 
     else if (pressedKeys['CapsLock'] === undefined && pressedKeys['Shift'] === undefined) {
-        fillKeys(false);
+        keyboard.fillKeys(false);
     }
 
     else if (pressedKeys['CapsLock'] === undefined && pressedKeys['Shift'] === true) {
-        fillKeys(true);
+        keyboard.fillKeys(true);
     }
 
+}
 
-    // if ((pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === false) || (pressedKeys['CapsLock'] === false && pressedKeys['Shift'] === true)) {
-    //     fillKeys(true);
-    // }
+const tieMouseEvents = () => {
 
-    // // else if (pressedKeys['CapsLock'] === undefined || pressedKeys['Shift'] === undefined) {
-    // //     fillKeys(false);
-    // // }
+    keyboardKeys.forEach(element => {
+        element.addEventListener ('mousedown', (event) => {
+            element.classList.add('clicked');
+            const key = event.target.getAttribute('data-button');
+        // keyboardKeys = document.querySelectorAll('.key-single');
+        // iteratableKeyboard = Array.from(keyboardKeys);
+                   
+        // let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === element.getAttribute('data-key'));
+        textArea.value += event.target.innerText;    
+
+            if (key === 'CapsLock') {
+                capitalizeLetters()
+            }
+        });
+        element.addEventListener('mouseup', () => {
+            element.classList.remove('clicked');
+        })
+        element.addEventListener('mouseleave', () => {
+            element.classList.remove('clicked');
+        })
+    });
     
-    // else if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === true) {
-    //     fillKeys(false)
-    // };
+}
 
-    // if (pressedKeys['CapsLock'] === true && event.key === 'CapsLock') {
-    //     fillKeys(false);
-    //     // delete pressedKeys['CapsLock'];
-    // };
+tieMouseEvents();
 
-    // if ()
+let caps = false;
+let shift = false;
 
-    // if (event.shiftKey === true )
+let pressedKeys = {
+};
 
-    // if (event.shiftKey === true && caps === false) {
-    //     shift = true;
-    //     fillKeys(shift)
-    // }
+let language = 'English';
 
-    // else if (event.shiftKey === true && caps === true) {
-    //     shift = false;
-    //     fillKeys(shift);
-    //     shift = true;
-    // }
+document.addEventListener('keydown', (event) => {
+    const audio = new Audio('./assets/click.mp3');
 
-    // // else {
-    // //     shift = false;
-    // //     fillKeys(shift);
-    // // };
+    audio.currentTime = 0;
+    audio.play();
+console.log(event.key, event.code, 'key code');
 
-    // if (event.key === 'CapsLock' && caps === false) {
-    //     caps = true;
-    //     fillKeys(caps);
-    // }
+if (event.code === 'Backspace') {
+    console.log(textArea.value);
+    let str = textArea.value;
+    console.log(textArea.selectionEnd);
+   textArea.value = str.slice(0, textArea.selectionEnd) + str.slice(textArea.selectionEnd);
+   return false
+}
 
-    // else if (event.key === 'CapsLock') {
-    //     caps = false;
-    //     fillKeys(caps);
-    // }
+    if (pressedKeys['CapsLock'] === true && event.key === 'CapsLock') {
+        delete pressedKeys['CapsLock'];
+        keyboard.fillKeys(false);
+    }
+    
+    else {
+    pressedKeys[event.key] = true;
+    }
+    
+    if (pressedKeys['Control'] === true && pressedKeys['Alt'] === true && language === 'English') {
+        language = 'Russian';
+        console.log('russs changed');
 
-    // else if (event.key !== 'Shift') {
-    //     caps = false;
-    //     fillKeys(caps)
-    // };
+    }
+    else if (pressedKeys['Control'] === true && pressedKeys['Alt'] === true && language === 'Russian') {
+        language = 'English';
+        console.log('english changed');
+    };
 
-    if (pressedKeys['CapsLock'] === true) {
-        caps = true;
+    if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === undefined && !(Object.keys(pressedKeys).length > 2)) {
+        keyboard.fillKeys(true, language);
+    }
+    
+    else if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === true 
+    && (Object.keys(pressedKeys).length <= 2) ) {
+        console.log(event.key,'fdkaokfeo,FDAFFDAFDAFDAFADF', Object.keys(pressedKeys).length);
+        keyboard.fillKeys(false, language);
     }
 
-    if (event.repeat === true && functionalKeys['indexes'].includes(event.key)) {
+    // else if (pressedKeys['CapsLock'] === undefined && pressedKeys['Shift'] === undefined) {
+    //     fillKeys(false, language);
+    // }
+
+    else if (pressedKeys['CapsLock'] === undefined && pressedKeys['Shift'] === true) {
+        keyboard.fillKeys(true, language);
+    }
+
+
+
+    if (event.repeat === true && functionalKeys['indexes'].includes(event.code)) {
+
+ 
+        keyboardKeys = document.querySelectorAll('.key-single');
+        iteratableKeyboard = Array.from(keyboardKeys);
+               
+    let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code);
+    if (keySelected === undefined) {
+        keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code)
+    }
+    
+    keySelected.classList.add('clicked');
+
         return false
     }
 
@@ -122,31 +143,25 @@ document.addEventListener('keydown', (event) => {
     keyboardKeys = document.querySelectorAll('.key-single');
     iteratableKeyboard = Array.from(keyboardKeys);
 
-    // console.log(event.key, event.code, 'key-codedede', iteratableKeyboard);
     
-    let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key);
-    // console.log(keySelected, 'SELELELELTLELTLETLE');
-    if (keySelected === undefined) {
-        keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code)
-    };
-    if (keySelected === undefined) {
-        keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key.toUpperCase())
-    };
-    if (keySelected === undefined) {
-        keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key.toLowerCase())
-    };
+    let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code);
 
-    // console.log(keySelected);
-    
+    console.log(keySelected);
+
     keySelected.classList.add('clicked');
-    const key = event.key;
-    textArea.value += key;
+    textArea.value += keySelected.innerText;
+
+    tieMouseEvents();
 
 });
 
 document.addEventListener('keyup', (event) => {
 
-    // console.log(event.key,'key up codeodoeod');
+    // audio.pause();
+    // audio.currentTime = 0;
+
+    console.log('key uppped');
+    
     if (event.key !== 'CapsLock') {
         delete pressedKeys[event.key];
     }
@@ -154,32 +169,20 @@ document.addEventListener('keyup', (event) => {
 
     
     if ((pressedKeys['CapsLock'] === true || pressedKeys['Shift'] === true) && event.key === 'Shift') {
-        fillKeys(true);
+        keyboard.fillKeys(true, language);
     }
 
-    else if (pressedKeys['CapsLock'] === undefined && pressedKeys['Shift'] === undefined) {
-        fillKeys(false);
+    else if (pressedKeys['CapsLock'] === undefined && pressedKeys['Shift'] === undefined && event.key === 'Shift') {
+        keyboard.fillKeys(false, language);
     }
 
-
-    if (shift === true && caps === false) {
-        shift = false;
-        fillKeys(shift)
-    }
-
-    else if (shift === true && caps === true) {
-        shift = false;
-        fillKeys(caps)
-    }
 
     event.preventDefault();
 
     keyboardKeys = document.querySelectorAll('.key-single');
     iteratableKeyboard = Array.from(keyboardKeys)
-    // console.log(keyboardKeys);
 
     let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key);
-    // console.log(kySelected, 'SELELELELTLELTLETLE');
     if (keySelected === undefined) {
         keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code)
     };
@@ -189,5 +192,13 @@ document.addEventListener('keyup', (event) => {
     if (keySelected === undefined) {
         keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.key.toLowerCase())
     };
+
+
     keySelected.classList.remove('clicked');
-})
+
+    tieMouseEvents();
+
+});
+
+
+export {textArea, functionalKeys, fillKeys};

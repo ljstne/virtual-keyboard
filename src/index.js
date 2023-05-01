@@ -1,28 +1,8 @@
 "use strict";
 
-// import 
+import {keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes} from './layouts.js';
 
 const body = document.body;
-
-const keys = [
-    "`","1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
-    "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "Del",
-    "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
-    "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "Shift",
-    "Control", "Win", "Alt", "Space", "Alt", "Control", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
-];
-
-const keysCaps = [
-    "`","1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
-    "Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\", "Del",
-    "CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter",
-    "Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "?", "Shift",
-    "Control", "Win", "Alt", "Space", "Alt", "Control", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
-];
-
-const functionalKeys = {
-    indexes: ["Tab", "Win", "CapsLock", "Alt", "Shift"],
-}
 
 
 const wrapper = document.createElement('div');
@@ -39,85 +19,202 @@ wrapper.append(keyboardContainer);
 
 let keyboardKeys;
 
-const fillKeys = async function(caps) {
+class Keyboard {
+    constructor() {
+        // this.caps = caps;
+        // this.layout = layout;
+        this.fillKeys = async function(caps, layout) {
 
-
-    keyboardContainer.innerHTML = '';
-
-
-let keysArrayToUse = keys;
-
-if (caps === true) {
-    keysArrayToUse = keysCaps;
+            keyboardContainer.innerHTML = '';
+        
+            let keysArrayToUse = keys;
+        
+            if (caps === false && layout === 'English') {
+                keysArrayToUse = keys;
+            }
+        
+            if (caps === true && layout === 'English') {
+                keysArrayToUse = keysCaps;
+            }
+        
+            else if (caps === false && layout === 'Russian') {
+                keysArrayToUse = russianKeyboard;
+            }
+            else if (caps === true && layout === 'Russian') {
+                keysArrayToUse = russianKeyboardCaps;
+            };
+                
+            for (let i = 0; i < 5; i++) {
+                const keyboardRow = document.createElement('div');
+                keyboardRow.className = "keys-row";
+                
+                if (i === 0) {
+                    for (let j = 0; j < 14; j++) {
+                        const keyHtml = document.createElement('div');
+                        keyHtml.className = "key-single";
+                        keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                        keyHtml.setAttribute('role', 'button')
+                        const currentKey = keysArrayToUse[j];
+                        keyHtml.innerText = currentKey;
+                        keyboardRow.append(keyHtml);
+                    }
+                }
+                else if (i === 1) {
+                    for (let j = 14; j < 29; j++) {
+                        const keyHtml = document.createElement('div');
+                        const span = document.createElement('span');
+                        keyHtml.className = "key-single";
+                        keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                        keyHtml.setAttribute('role', 'button');
+                        const currentKey = keysArrayToUse[j];
+                        keyHtml.innerText = currentKey;
+                        keyboardRow.append(keyHtml);
+                    }
+                }
+                else if (i === 2) {
+                    for (let j = 29; j < 42; j++) {
+                        const keyHtml = document.createElement('div');
+                        const span = document.createElement('span');
+                        keyHtml.className = "key-single";
+                        keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                        keyHtml.setAttribute('role', 'button');
+                        const currentKey = keysArrayToUse[j];
+                        keyHtml.innerText = currentKey;
+                        keyboardRow.append(keyHtml);
+                    }
+                }
+                else if (i === 3) {
+                    for (let j = 42; j < 54; j++) {
+                        const keyHtml = document.createElement('div');
+                        const span = document.createElement('span');
+                        keyHtml.className = "key-single";
+                        keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                        keyHtml.setAttribute('role', 'button');
+                        const currentKey = keysArrayToUse[j];
+                        keyHtml.innerText = currentKey;
+                        // keyHtml.append(span);
+                        keyboardRow.append(keyHtml);
+                    }
+                }
+                else if (i === 4) {
+                    for (let j = 54; j < 65; j++) {
+                        const keyHtml = document.createElement('div');
+                        keyHtml.className = "key-single";
+                        keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+                        keyHtml.setAttribute('role', 'button');
+                        const currentKey = keysArrayToUse[j];
+                        keyHtml.innerText = currentKey;
+                        keyboardRow.append(keyHtml);
+                    }
+                }
+        
+                keyboardContainer.append(keyboardRow)
+            }
+        
+        }
+}
 }
 
-for (let i = 0; i < 5; i++) {
-    const keyboardRow = document.createElement('div');
-    keyboardRow.className = "keys-row";
+const keyboard = new Keyboard();
+keyboard.fillKeys(false, 'English')
 
-    // fill keyboard with keys
+// const fillKeys = async function(caps, layout) {
 
-    if (i === 0) {
-        for (let j = 0; j < 14; j++) {
-            const keyHtml = document.createElement('div');
-            keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
-            keyHtml.setAttribute('role', 'button')
-            const currentKey = keysArrayToUse[j];
-            keyHtml.innerText = currentKey;
-            keyboardRow.append(keyHtml);
-        }
-    }
-    else if (i === 1) {
-        for (let j = 14; j < 29; j++) {
-            const keyHtml = document.createElement('div');
-            keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
-            keyHtml.setAttribute('role', 'button')
-            const currentKey = keysArrayToUse[j];
-            keyHtml.innerText = currentKey;
-            keyboardRow.append(keyHtml);
-        }
-    }
-    else if (i === 2) {
-        for (let j = 29; j < 42; j++) {
-            const keyHtml = document.createElement('div');
-            keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
-            keyHtml.setAttribute('role', 'button');
-            const currentKey = keysArrayToUse[j];
-            keyHtml.innerText = currentKey;
-            keyboardRow.append(keyHtml);
-        }
-    }
-    else if (i === 3) {
-        for (let j = 42; j < 54; j++) {
-            const keyHtml = document.createElement('div');
-            keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
-            keyHtml.setAttribute('role', 'button');
-            const currentKey = keysArrayToUse[j];
-            keyHtml.innerText = currentKey;
-            keyboardRow.append(keyHtml);
-        }
-    }
-    else if (i === 4) {
-        for (let j = 54; j < 64; j++) {
-            const keyHtml = document.createElement('div');
-            keyHtml.className = "key-single";
-            keyHtml.setAttribute('data-key', `${keysArrayToUse[j]}`)
-            keyHtml.setAttribute('role', 'button');
-            const currentKey = keysArrayToUse[j];
-            keyHtml.innerText = currentKey;
-            keyboardRow.append(keyHtml);
-        }
-    }
+//     keyboardContainer.innerHTML = '';
 
-    keyboardContainer.append(keyboardRow)
-}
+//     let keysArrayToUse = keys;
 
-}
-fillKeys(false)
+//     if (caps === false && layout === 'English') {
+//         keysArrayToUse = keys;
+//     }
+
+
+//     if (caps === true && layout === 'English') {
+//         keysArrayToUse = keysCaps;
+//     }
+
+//     else if (caps === false && layout === 'Russian') {
+//         keysArrayToUse = russianKeyboard;
+//     }
+//     else if (caps === true && layout === 'Russian') {
+//         keysArrayToUse = russianKeyboardCaps;
+//     };
+
+//     // keysArrayToUse = keyCodes;
+
+//     for (let i = 0; i < 5; i++) {
+//         const keyboardRow = document.createElement('div');
+//         keyboardRow.className = "keys-row";
+
+//         // fill keyboard with keys
+
+//         if (i === 0) {
+//             for (let j = 0; j < 14; j++) {
+//                 const keyHtml = document.createElement('div');
+//                 keyHtml.className = "key-single";
+//                 keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+//                 keyHtml.setAttribute('role', 'button')
+//                 const currentKey = keysArrayToUse[j];
+//                 keyHtml.innerText = currentKey;
+//                 keyboardRow.append(keyHtml);
+//             }
+//         }
+//         else if (i === 1) {
+//             for (let j = 14; j < 29; j++) {
+//                 const keyHtml = document.createElement('div');
+//                 const span = document.createElement('span');
+//                 keyHtml.className = "key-single";
+//                 keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+//                 keyHtml.setAttribute('role', 'button');
+//                 const currentKey = keysArrayToUse[j];
+//                 keyHtml.innerText = currentKey;
+//                 // keyHtml.append(span);
+//                 keyboardRow.append(keyHtml);
+//             }
+//         }
+//         else if (i === 2) {
+//             for (let j = 29; j < 42; j++) {
+//                 const keyHtml = document.createElement('div');
+//                 const span = document.createElement('span');
+//                 keyHtml.className = "key-single";
+//                 keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+//                 keyHtml.setAttribute('role', 'button');
+//                 const currentKey = keysArrayToUse[j];
+//                 keyHtml.innerText = currentKey;
+//                 // keyHtml.append(span);
+//                 keyboardRow.append(keyHtml);
+//             }
+//         }
+//         else if (i === 3) {
+//             for (let j = 42; j < 54; j++) {
+//                 const keyHtml = document.createElement('div');
+//                 const span = document.createElement('span');
+//                 keyHtml.className = "key-single";
+//                 keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+//                 keyHtml.setAttribute('role', 'button');
+//                 const currentKey = keysArrayToUse[j];
+//                 keyHtml.innerText = currentKey;
+//                 // keyHtml.append(span);
+//                 keyboardRow.append(keyHtml);
+//             }
+//         }
+//         else if (i === 4) {
+//             for (let j = 54; j < 65; j++) {
+//                 const keyHtml = document.createElement('div');
+//                 keyHtml.className = "key-single";
+//                 keyHtml.setAttribute('data-key', `${keyCodes[j]}`)
+//                 keyHtml.setAttribute('role', 'button');
+//                 const currentKey = keysArrayToUse[j];
+//                 keyHtml.innerText = currentKey;
+//                 keyboardRow.append(keyHtml);
+//             }
+//         }
+
+//         keyboardContainer.append(keyboardRow)
+//     }
+
+// }
+// fillKeys(false, 'English')
 
 // document.addEventListener('keydown', (event) => {
 //     const key = event.key;

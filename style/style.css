@@ -5,6 +5,10 @@
     gap: 50px;
 }
 
+.wrapper * {
+    box-sizing: border-box;
+}
+
 .text-area {
     width: 65vw;
     height: 30vh;
@@ -13,6 +17,9 @@
 .keyboard__container {
     display: flex;
     flex-direction: column;
+    background-color: rgb(221, 221, 221);
+    border: 2px solid rgb(0, 0, 0);
+    max-width: 900px;
 }
 
 .keys-row {
@@ -20,17 +27,38 @@
 }
 
 .key-single {
-    padding: 7px 25px 13px 9px;
+    padding: 6px 20px 12px 8px;
     background-color: rgb(39, 39, 39);
     color: rgb(228, 233, 235);
-    transition: background-color 300ms;
+    transition: background-color 1s;
     margin: 5px 4px;
     font-size: 1.2rem;
     border: 2px solid rgb(221, 219, 219);
+    width: 60%;
+}
+
+.key-single span {
+    display: inline-block;
+    width: 14px;
 }
 
 .key-single.clicked {
     background-color: rgb(242, 137, 219);
-    transition: background-color 300ms;
+    transition: background-color 200ms;
 
+}
+
+.key-single[data-key="ShiftLeft"],
+.key-single[data-key="ShiftRight"] {
+    padding: 6px 60px 12px 19px;
+}
+
+.key-single[data-key="Enter"],
+.key-single[data-key="CapsLock"] {
+    padding: 6px 50px 12px 17px;
+}
+
+.key-single[data-key="ControlLeft"],
+.key-single[data-key="ControlRight"] {
+    padding: 6px 23px 10px 9px;
 }
