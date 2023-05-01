@@ -1,4 +1,4 @@
-import {keyboard, textArea, fillKeys} from "./index.js";
+import {keyboard, textArea} from "./index.js";
 import {functionalKeys} from "./layouts.js";
 
 
@@ -6,19 +6,13 @@ let keyboardKeys = document.querySelectorAll('.key-single');
 
 let iteratableKeyboard = Array.from(keyboardKeys);
 
-
-const timeout = 300;
-
 const capitalizeLetters = () => {
     if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === undefined && !(Object.keys(pressedKeys).length > 2)) {
         keyboard.fillKeys(true);
-        console.log(event.key,'1111111111111111');
-
     }
     
     else if (pressedKeys['CapsLock'] === true && pressedKeys['Shift'] === true 
     && (Object.keys(pressedKeys).length <= 2) ) {
-        console.log(event.key,'fdkaokfeo,FDAFFDAFDAFDAFADF', Object.keys(pressedKeys).length);
         keyboard.fillKeys(false);
     }
 
@@ -38,11 +32,8 @@ const tieMouseEvents = () => {
         element.addEventListener ('mousedown', (event) => {
             element.classList.add('clicked');
             const key = event.target.getAttribute('data-button');
-        // keyboardKeys = document.querySelectorAll('.key-single');
-        // iteratableKeyboard = Array.from(keyboardKeys);
-                   
-        // let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === element.getAttribute('data-key'));
-        textArea.value += event.target.innerText;    
+
+            textArea.value += event.target.innerText;    
 
             if (key === 'CapsLock') {
                 capitalizeLetters()
@@ -60,32 +51,36 @@ const tieMouseEvents = () => {
 
 tieMouseEvents();
 
-let caps = false;
-let shift = false;
-
 let pressedKeys = {
 };
 
 let language = 'English';
 
 document.addEventListener('keydown', (event) => {
-    const audio = new Audio('./assets/click.mp3');
 
+    if (event.repeat === false) {
+    const audio = new Audio('./assets/click.mp3');
     audio.currentTime = 0;
     audio.play();
-console.log(event.key, event.code, 'key code');
+    }
 
 if (event.code === 'Backspace') {
-    console.log(textArea.value);
     let str = textArea.value;
     console.log(textArea.selectionEnd);
    textArea.value = str.slice(0, textArea.selectionEnd) + str.slice(textArea.selectionEnd);
    return false
 }
 
+else if (event.code === 'Delete') {
+    let str = textArea.value;
+    console.log(textArea.selectionEnd);
+   textArea.value = str.slice(0, textArea.selectionEnd + 1) + str.slice(textArea.selectionEnd +1);
+   return false
+}
+
     if (pressedKeys['CapsLock'] === true && event.key === 'CapsLock') {
         delete pressedKeys['CapsLock'];
-        keyboard.fillKeys(false);
+        keyboard.fillKeys(false, language);
     }
     
     else {
@@ -94,11 +89,14 @@ if (event.code === 'Backspace') {
     
     if (pressedKeys['Control'] === true && pressedKeys['Alt'] === true && language === 'English') {
         language = 'Russian';
-        console.log('russs changed');
+        keyboard.fillKeys(false, language);
 
+        console.log('language changed');
     }
     else if (pressedKeys['Control'] === true && pressedKeys['Alt'] === true && language === 'Russian') {
         language = 'English';
+        keyboard.fillKeys(false, language);
+
         console.log('english changed');
     };
 
@@ -146,10 +144,12 @@ if (event.code === 'Backspace') {
     
     let keySelected = iteratableKeyboard.find(e=> e.getAttribute('data-key') === event.code);
 
-    console.log(keySelected);
+    if (!functionalKeys.indexes.includes(event.code)) {
+        textArea.value += keySelected.innerText;
+
+    }
 
     keySelected.classList.add('clicked');
-    textArea.value += keySelected.innerText;
 
     tieMouseEvents();
 
@@ -201,4 +201,4 @@ document.addEventListener('keyup', (event) => {
 });
 
 
-export {textArea, functionalKeys, fillKeys};
+export {textArea, functionalKeys};

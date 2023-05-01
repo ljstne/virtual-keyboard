@@ -1,9 +1,8 @@
-import {textArea, fillKeys} from "./index.js";
-// import {textArea, functionalKeys, fillKeys} from "./keyboard.js";
+
 
 const keyCodes = [
     "Backquote","Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace",
-    "Tab", "KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight", "Backslash", "Del",
+    "Tab", "KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight", "Backslash", "Delete",
     "CapsLock", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote", "Enter",
     "ShiftLeft", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ShiftRight",
     "ControlLeft", "MetaLeft", "AltLeft", "Space", "AltRight", "ContextMenu", "ControlRight", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
@@ -38,7 +37,7 @@ const russianKeyboard = [
     "Tab", "я", "в", "е", "р", "т", "ы", "у", "и", "о", "п", "ш", "щ", "\\", "Del",
     "CapsLock", "а", "с", "д", "ф", "г", "ч", "й", "к", "л", ";", "'", "Enter",
     "Shift", "з", "х", "ц", "ж", "б", "н", "м", ",", ".", "?", "Shift",
-    "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "Left", "Up", "Down", "Right"
+    "Ctrl", "Win", "Alt", "Space", "Alt", "Ctx", "Ctrl", "Left", "Up", "Down", "Right"
 ];
 
 const russianKeyboardCaps = [
@@ -46,12 +45,12 @@ const russianKeyboardCaps = [
     "Tab", "Я", "В", "Е", "Р", "Т", "Ы", "У", "И", "О", "П", "Ш", "Щ", "\\", "Del",
     "CapsLock", "А", "С", "Д", "Ф", "Г", "Ч", "Й", "К", "Л", ";", "'", "Enter",
     "Shift", "З", "Ч", "Ц", "Ж", "Б", "Н", "М", ",", ".", "?", "Shift",
-    "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
+    "Ctrl", "Win", "Alt", "Space", "Alt", "Ctx", "Ctrl", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
 ];
 
 const functionalKeys = {
     indexes: ["Tab", "MetaLeft", "CapsLock", "AltLeft", "AltRight", "ShiftLeft", "ShiftRight", "ControlRight",
-    "ControlLeft",],
+    "ControlLeft", "ContextMenu" , 'Delete'],
 };
 
 export {keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes}
