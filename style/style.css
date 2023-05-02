@@ -47,8 +47,6 @@
 .key-single.clicked {
     background-color: rgb(242, 137, 219);
     transition: background-color 200ms;
-    /* animation-name: clickedAnimation;
-    animation-duration: 400ms; */
 }
 
 .key-single[data-key="ShiftLeft"],
