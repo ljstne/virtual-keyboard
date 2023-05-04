@@ -1,0 +1,88 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.wrapper * {
+    box-sizing: border-box;
+}
+
+.text-area {
+    width: 65vw;
+    height: 30vh;
+}
+
+.keyboard__container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(221, 221, 221);
+    border: 2px solid rgb(0, 0, 0);
+    max-width: 900px;
+}
+
+.keys-row {
+    display: flex;
+    align-items: center;
+}
+
+.key-single {
+    padding: 6px 20px 12px 8px;
+    background-color: rgb(39, 39, 39);
+    color: rgb(228, 233, 235);
+    transition: background-color 1s;
+    margin: 5px 4px;
+    font-size: 1.2rem;
+    border: 2px solid rgb(203 188 188);
+    width: 150px;
+    box-shadow: 3px 3px 13px 2px rgba(0,0,0,0.5);;
+}
+
+.key-single span {
+    display: inline-block;
+    width: 14px;
+}
+
+.key-single.clicked {
+    background-color: rgb(242, 137, 219);
+    transition: background-color 200ms;
+}
+
+.key-single[data-key="ShiftLeft"],
+.key-single[data-key="ShiftRight"] {
+    padding: 6px 60px 12px 19px;
+}
+
+.key-single[data-key="Enter"],
+.key-single[data-key="CapsLock"] {
+    padding: 6px 50px 12px 17px;
+}
+
+.key-single[data-key="ControlLeft"],
+.key-single[data-key="ControlRight"] {
+    padding: 6px 23px 10px 9px;
+}
+
+.key-single[data-key="ArrowUp"],
+.key-single[data-key="ArrowDown"]
+ {
+    text-align: center;
+    height: 23px;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    width: 55px;
+}
+
+.key-single[data-key="ArrowLeft"],
+.key-single[data-key="ArrowRight"] {
+    padding: 6px 0 10px 0;
+    text-align: center;
+}
+
+.keyboard__description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
