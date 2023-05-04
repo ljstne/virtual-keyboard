@@ -143,12 +143,13 @@ const tieMouseEvents = () => {
         keySelected = iteratableKeyboard.find((e) => e.getAttribute('data-key') === event.target.getAttribute('data-key'));
       }
     }
-    if (!functionalKeys.indexes.includes(element.getAttribute('data-key'))) { textArea.value += event.target.innerText; } else if (element.getAttribute('data-key') === 'Enter') {
+    if (!functionalKeys.indexes.includes(element.getAttribute('data-key'))) { textArea.value += event.target.innerText; }
+    else if (element.getAttribute('data-key') === 'Enter') {
       textArea.value += '\n';
-      return false;
+      // return false;
     } else if (element.getAttribute('data-key') === 'Space') {
       textArea.value += ' ';
-      return false;
+      // return false;
     }
 
     keyboardKeys = document.querySelectorAll('.key-single');
