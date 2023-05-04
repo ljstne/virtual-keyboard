@@ -22,8 +22,14 @@ const keysCaps = [
   'Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'Ctx', 'Ctrl', '◄', '▲', '▼', '►',
 ];
 
+const lettersWithCase = [
+  'Backquote', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash',
+  'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote',
+  'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash',
+];
+
 const russianKeyboard = [
-  '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
+  'ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
   'Tab', 'я', 'в', 'е', 'р', 'т', 'ы', 'у', 'и', 'о', 'п', 'ш', 'щ', '\\', 'Del',
   'CapsLock', 'а', 'с', 'д', 'ф', 'г', 'ч', 'й', 'к', 'л', ';', "'", 'Enter',
   'Shift', 'з', 'х', 'ц', 'ж', 'б', 'н', 'м', ',', '.', '?', 'Shift',
@@ -31,7 +37,7 @@ const russianKeyboard = [
 ];
 
 const russianKeyboardCaps = [
-  '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
+  'Ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
   'Tab', 'Я', 'В', 'Е', 'Р', 'Т', 'Ы', 'У', 'И', 'О', 'П', 'Ш', 'Щ', '\\', 'Del',
   'CapsLock', 'А', 'С', 'Д', 'Ф', 'Г', 'Ч', 'Й', 'К', 'Л', ';', "'", 'Enter',
   'Shift', 'З', 'Ч', 'Ц', 'Ж', 'Б', 'Н', 'М', ',', '.', '?', 'Shift',
@@ -40,9 +46,9 @@ const russianKeyboardCaps = [
 
 const functionalKeys = {
   indexes: ['Tab', 'MetaLeft', 'CapsLock', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight', 'ControlRight',
-    'ControlLeft', 'ContextMenu', 'Delete', 'Enter', 'Space'],
+    'ControlLeft', 'ContextMenu', 'Delete', 'Backspace', 'Enter', 'Space'],
 };
 
 export {
-  keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes,
+  keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes, lettersWithCase,
 };

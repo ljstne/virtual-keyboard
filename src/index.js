@@ -1,5 +1,5 @@
 import {
-  keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes,
+  keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes, lettersWithCase,
 } from './layouts';
 
 const { body } = document;
@@ -108,6 +108,49 @@ class Keyboard {
         }
 
         keyboardContainer.append(keyboardRow);
+      }
+    };
+
+    this.changeCase = async function changeCase() {
+      const regex = /[a-zа-яёaA-ZА-ЯЁ]/g;
+      const yoButton = document.querySelector('[data-Key="Backquote"]');
+      for (let i = 0; i < lettersWithCase.length; i += 1) {
+        const el = document.querySelector(`[data-key="${lettersWithCase[i]}"]`);
+        if ((el.innerText.match(regex) && el.innerText === el.innerText.toUpperCase())
+        || el.getAttribute('data-key') === 'Backquote') {
+          yoButton.innerText = yoButton.innerText.toLowerCase();
+          el.innerText = el.innerText.toLowerCase();
+        } else if ((el.innerText.match(regex) && el.innerText === el.innerText.toLowerCase())
+        || (el.getAttribute('data-key') === 'Backquote')) {
+          yoButton.innerText = yoButton.innerText.toUpperCase();
+
+          el.innerText = el.innerText.toUpperCase();
+        }
+      }
+    };
+    this.changeLanguage = async function changeLanguage(layout) {
+      const regex = /[a-zа-яёaA-ZА-ЯЁ]/g;
+      for (let i = 0; i < keyCodes.length; i += 1) {
+        const el = document.querySelector(`[data-key="${keyCodes[i]}"]`);
+        if ((el.innerText.match(regex) && el.innerText === el.innerText.toUpperCase())
+        || el.getAttribute('data-key') === 'Backquote') {
+          if (layout === 'English') {
+            el.innerText = keysCaps[i];
+          } else if (el.getAttribute('data-key') === 'Backquote') {
+            el.innerText = 'ё';
+          } else {
+            el.innerText = russianKeyboardCaps[i];
+          }
+        } else if ((el.innerText.match(regex) && el.innerText === el.innerText.toLowerCase())
+        || el.getAttribute('data-key') === 'Backquote') {
+          if (layout === 'English') {
+            el.innerText = keys[i];
+          } else if (el.getAttribute('data-key') === 'Backquote') {
+            el.innerText = 'ё';
+          } else {
+            el.innerText = russianKeyboard[i];
+          }
+        }
       }
     };
   }
