@@ -1,5 +1,6 @@
 import {
-  keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes, lettersWithCase,
+  keys, keysCaps, russianKeyboard, russianKeyboardCaps, functionalKeys, keyCodes,
+  keysShift, shiftCodes, keysShiftRussian,
 } from './layouts';
 
 const { body } = document;
@@ -111,11 +112,36 @@ class Keyboard {
       }
     };
 
-    this.changeCase = async function changeCase() {
-      const regex = /[a-zа-яёaA-ZА-ЯЁ]/g;
+    this.changeCase = async function changeCase(key) {
+      const regex = /[a-zа-яёaA-ZА-ЯЁ[\]\\]/g;
       const yoButton = document.querySelector('[data-Key="Backquote"]');
-      for (let i = 0; i < lettersWithCase.length; i += 1) {
-        const el = document.querySelector(`[data-key="${lettersWithCase[i]}"]`);
+      const qButton = document.querySelector('[data-Key="KeyQ"]');
+      for (let i = 0; i < keyCodes.length; i += 1) {
+        const el = document.querySelector(`[data-key="${keyCodes[i]}"]`);
+        const data = keyCodes[i];
+
+        if (key === 'shift' && shiftCodes.includes(data)) {
+          if (qButton.innerText === 'q'
+          || qButton.innerText === 'Q') {
+            el.innerText = keysShift[i];
+          } else if ((qButton.innerText === 'я'
+          || qButton.innerText === 'Я')
+          && (i < 14 || i === 52)) {
+            el.innerText = keysShiftRussian[i];
+          }
+        }
+
+        if (key !== 'shift' && shiftCodes.includes(data)) {
+          if (qButton.innerText === 'q'
+          || qButton.innerText === 'Q') {
+            el.innerText = keys[i];
+          } else if ((qButton.innerText === 'я'
+         || qButton.innerText === 'Я')
+         && (i < 14 || i === 52)) {
+            el.innerText = russianKeyboard[i];
+          }
+        }
+
         if ((el.innerText.match(regex) && el.innerText === el.innerText.toUpperCase())
         || el.getAttribute('data-key') === 'Backquote') {
           yoButton.innerText = yoButton.innerText.toLowerCase();
@@ -129,10 +155,12 @@ class Keyboard {
       }
     };
     this.changeLanguage = async function changeLanguage(layout) {
-      const regex = /[a-zа-яёaA-ZА-ЯЁ]/g;
+      const regex = /[a-zа-яёaA-ZА-ЯЁ[\]\\]/g;
       for (let i = 0; i < keyCodes.length; i += 1) {
         const el = document.querySelector(`[data-key="${keyCodes[i]}"]`);
-        if ((el.innerText.match(regex) && el.innerText === el.innerText.toUpperCase())
+        const qButton = document.querySelector('[data-Key="KeyQ"]');
+
+        if ((el.innerText.match(regex) && qButton.innerText === qButton.innerText.toUpperCase())
         || el.getAttribute('data-key') === 'Backquote') {
           if (layout === 'English') {
             el.innerText = keysCaps[i];
@@ -141,7 +169,8 @@ class Keyboard {
           } else {
             el.innerText = russianKeyboardCaps[i];
           }
-        } else if ((el.innerText.match(regex) && el.innerText === el.innerText.toLowerCase())
+        } else if ((el.innerText.match(regex)
+        && qButton.innerText === qButton.innerText.toLowerCase())
         || el.getAttribute('data-key') === 'Backquote') {
           if (layout === 'English') {
             el.innerText = keys[i];

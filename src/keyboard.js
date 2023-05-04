@@ -103,7 +103,12 @@ const tieMouseEvents = () => {
     if (event.target.getAttribute('data-key') === 'CapsLock'
     || event.target.getAttribute('data-key') === 'ShiftLeft'
     || event.target.getAttribute('data-key') === 'ShiftRight') {
-      keyboard.changeCase();
+      if (event.target.getAttribute('data-key') === 'ShiftLeft'
+      || event.target.getAttribute('data-key') === 'ShiftRight') {
+        keyboard.changeCase('shift');
+      } else {
+        keyboard.changeCase('caps');
+      }
     }
 
     // if (pressedKeys.CapsLock === true && event.target.getAttribute('data-key') === 'CapsLock') {
@@ -143,8 +148,7 @@ const tieMouseEvents = () => {
         keySelected = iteratableKeyboard.find((e) => e.getAttribute('data-key') === event.target.getAttribute('data-key'));
       }
     }
-    if (!functionalKeys.indexes.includes(element.getAttribute('data-key'))) { textArea.value += event.target.innerText; }
-    else if (element.getAttribute('data-key') === 'Enter') {
+    if (!functionalKeys.indexes.includes(element.getAttribute('data-key'))) { textArea.value += event.target.innerText; } else if (element.getAttribute('data-key') === 'Enter') {
       textArea.value += '\n';
       // return false;
     } else if (element.getAttribute('data-key') === 'Space') {
@@ -179,7 +183,7 @@ const tieMouseEvents = () => {
 
     if (event.target.getAttribute('data-key') === 'ShiftLeft'
     || event.target.getAttribute('data-key') === 'ShiftRight') {
-      keyboard.changeCase();
+      keyboard.changeCase('shiftUp');
     }
 
     event.preventDefault();
@@ -280,7 +284,11 @@ document.addEventListener('keydown', (event) => {
     language = 'English';
     keyboard.changeLanguage(language);
   } else if (event.key === 'Shift' || event.key === 'CapsLock') {
-    keyboard.changeCase();
+    if (event.key === 'Shift') {
+      keyboard.changeCase('shift');
+    } else {
+      keyboard.changeCase('caps');
+    }
   }
 
   // if (pressedKeys.CapsLock === true && pressedKeys.Shift === undefined
@@ -324,7 +332,7 @@ document.addEventListener('keyup', (event) => {
   }
 
   if (event.key === 'Shift') {
-    keyboard.changeCase();
+    keyboard.changeCase('shiftUp');
   }
 
   // if ((pressedKeys.CapsLock === true || (pressedKeys.Shift === true
